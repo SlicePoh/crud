@@ -23,7 +23,20 @@ const getNote=async (req,res)=>{
 //create new note
 const createNote= async (req,res)=>{
     const{title,tags,details}=req.body
+    let emptyFields=[]
 
+    if(!title){
+        emptyFields.push('title')
+    }
+    if(!tags){
+        emptyFields.push('tags')
+    }
+    if(!details){
+        emptyFields.push('details')
+    }
+    if(emptyFields.length>0){
+        return res.status(400).json({error: 'Please fill in all the fields',emptyFields})
+    }
     //add doc to db
     try{
         const note=await Note.create({title,tags,details})

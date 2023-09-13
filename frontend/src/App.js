@@ -10,7 +10,7 @@ import { Navbar } from './components/Navbar';
 
 function App() {
   return (
-    <div className="bg-sky-100 dark:bg-sky-950">
+    <div className="bg-sky-200 dark:bg-sky-950">
       <Router>
         <Navbar/>
         <Routes>

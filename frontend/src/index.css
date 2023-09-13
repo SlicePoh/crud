@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,4 +6,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Baloo Paaji 2', cursive;
+}
+input#error{
+  border: 2px dotted red;
+}
+textarea#error{
+  border: 2px dotted red;
 }
