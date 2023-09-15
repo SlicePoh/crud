@@ -3,12 +3,21 @@ import React from 'react'
 import { BsTrash } from 'react-icons/bs'
 import { useNoteContext } from '../hooks/useNoteContext';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { useAuthContext } from '../hooks/useAuthContext';
 export const Card = ({ note }) => {
-  
+
   const {dispatch} = useNoteContext()
+  const {user}=useAuthContext()
+
   const handleDelete = async () => {
+    if(!user){
+      return
+    }
     const response = await fetch('/api/note/' + note._id, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
     })
     const json = await response.json()
     if (response.ok) {
@@ -16,7 +25,7 @@ export const Card = ({ note }) => {
     }
   }
   return (
-    <div className="flex flex-col items-end justify-between p-4 w-64 h-fit bg-white dark:bg-sky-950 border-2 dark:border-sky-500 shadow-md rounded-xl mx-5 shadow-slate-800 dark:shadow-slate-400">
+    <div className="flex flex-col items-end justify-between p-4 w-56 lg:w-64 h-fit bg-white dark:bg-sky-950 border-2 dark:border-sky-500 shadow-md rounded-xl my-3 mx-5 shadow-slate-800 dark:shadow-slate-400">
       <div className="flex justify-between items-start w-full ">
           <div className="flex flex-col">
             <div className="text-lg font-bold dark:text-gray-200">{note.title}</div>

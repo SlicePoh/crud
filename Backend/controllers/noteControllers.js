@@ -2,7 +2,8 @@ const Note=require('../models/noteModel')
 const mongoose=require('mongoose')
 //get all notes
 const getNotes=async (req,res)=>{
-    const notes=await Note.find({}).sort({createdAt: -1})
+    const user_id=req.user._id
+    const notes=await Note.find({user_id}).sort({createdAt: -1})
 
     res.status(200).json(notes)
 }
@@ -39,7 +40,8 @@ const createNote= async (req,res)=>{
     }
     //add doc to db
     try{
-        const note=await Note.create({title,tags,details})
+        const user_id= req.user._id
+        const note=await Note.create({title,tags,details,user_id})
         res.status(200).json(note)
     }catch(error){
         res.status(400).json({error: error.message})

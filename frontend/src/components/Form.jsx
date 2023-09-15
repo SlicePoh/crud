@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { useNoteContext } from '../hooks/useNoteContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 export const Form = () => {
     const {dispatch}= useNoteContext()
+    const {user}=useAuthContext()
+
     const [title,setTitle]=useState('')
     const [tags,setTags]=useState('')
     const [details,setDetails]=useState('')
@@ -11,12 +14,17 @@ export const Form = () => {
     const [emptyFields,setEmptyFields]=useState([])
     const handleSubmit= async (e) =>{
         e.preventDefault();
+        if(!user){
+            setError('You must be logged in')
+            return
+        }
         const note={title,tags,details}
         const response=await fetch('/api/note',{
             method: 'POST',
             body: JSON.stringify(note),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         })
         const json=await response.json()
@@ -36,8 +44,8 @@ export const Form = () => {
     }
 
     return (
-        <div className="flex justify-center items-start w-2/6 dark:text-white mt-5">
-            <form onSubmit={handleSubmit} className="fixed w-96  bg- dark:bg-inherit  p-5 rounded-xl">
+        <div className="flex justify-center items-start dark:text-white mt-5">
+            <form onSubmit={handleSubmit} className="inline-block lg:fixed w-80 dark:bg-inherit p-2 md:p-5 rounded-xl">
                 <div className="text-2xl font-extrabold">Add a note</div>
                 <div className="flex flex-col  justify-between">
                     <label className="m-3">Title</label>
@@ -51,7 +59,7 @@ export const Form = () => {
                     <label className="m-3">Details</label>
                     <textarea placeholder="A 10km. run at 6 A.M. tommorrow." id={emptyFields.includes('details') ? 'error': ''} className=" p-2 w-full  h-32 rounded-lg dark:bg-sky-800" type="text-area" onChange={(e)=>setDetails(e.target.value)} value={details} />
                 </div>
-                <button type="submit" className=" ml-24 w-36 my-5 bg-sky-800 dark:bg-sky-400 text-white text-xl dark:text-black rounded-lg p-2 font-bold">
+                <button type="submit" className=" w-36 my-5 bg-sky-950 dark:bg-sky-400 text-white text-xl dark:text-black rounded-lg p-2 font-bold">
                     Post
                 </button>
                 {error && <div className="text-center font-bold text-red-500 ">{error}</div>}
