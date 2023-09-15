@@ -25,8 +25,8 @@ export const Login = () => {
                     <input onChange={(e)=>setPassword(e.target.value)} type="password" value={password} id="password" placeholder="• • • • • • • • • • •" className="bg-gray-50  text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-sky-800  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required={true} />
                 </div>
 
-                <button disabled={isLoading} className="w-full dark:text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none  font-medium rounded-lg  px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 ">Login</button>
-                <div className="text-sm font-light text-gray-500 dark:text-gray-400">
+                <button disabled={isLoading} className="w-1/2 text-white dark:text-black bg-sky-800 hover:bg-sky-700  font-bold rounded-lg  px-5 py-2.5 text-center dark:bg-sky-300 dark:hover:bg-sky-400 ">Login</button>
+                <div className="text-sm font-light text-gray-600 dark:text-gray-400">
                     Don't have an account? <Link to="/signup" className="font-bold text-sky-800 hover:underline dark:text-sky-500">Signup here</Link>
                 </div>
                 {error && <div className="text-red-500 text-xl">{error}</div>}

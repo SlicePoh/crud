@@ -16,7 +16,7 @@ import { Login } from './pages/Login';
 function App() {
   const {user}=useAuthContext()
   return (
-    <div className="bg-sky-200 dark:bg-sky-950  min-h-screen w-full overflow-hidden">
+    <div className="bg-sky-300 dark:bg-sky-950  min-h-screen w-full overflow-hidden">
       <Router>
         <Navbar/>
         <Routes>

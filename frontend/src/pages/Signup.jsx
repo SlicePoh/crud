@@ -40,10 +40,10 @@ export const Signup = () => {
                         <label className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="/">Terms and Conditions</a></label>
                     </div>
                 </div> */}
-                <button type="submit" disabled={isLoading} className="w-full dark:text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none  font-medium rounded-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 ">Create an account</button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                    Already have an account? <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
-                </p>
+                <button type="submit" disabled={isLoading} className="w-fit text-white dark:text-black bg-sky-900 hover:bg-sky-800  font-bold rounded-lg px-5 py-2.5 text-center dark:bg-sky-300 dark:hover:bg-sky-400 ">Create an account</button>
+                <div className="text-sm font-light text-gray-600 dark:text-gray-400">
+                    Already have an account? <Link to="/login" className="font-bold text-sky-700 hover:underline dark:text-sky-500">Login here</Link>
+                </div>
                 {error && <div className="text-red-500 text-xl">{error}</div>}
             </form>
         </div>
