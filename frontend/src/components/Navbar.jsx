@@ -38,7 +38,7 @@ export const Navbar = (props) => {
                 {user && (
                     <div className="flex items-center dark:text-white text-black">
                         <span className="text-xs md:text-base hidden sm:block">{user.email}</span>
-                        <button onClick={handleClick} className="flex items-center justify-center mx-2 md:mx-5 p-1 md:p-2 font-bold rounded-lg text-xs md:text-base text-white dark:text-black bg-sky-950 dark:bg-sky-500">
+                        <button onClick={handleClick} className="flex items-center justify-center mx-2 md:mx-5 p-1 md:p-2 md:font-bold rounded-lg text-xs md:text-base text-white dark:text-black bg-sky-950 dark:bg-sky-500">
                             Logout
                         </button>
                     </div>
@@ -57,7 +57,7 @@ export const Navbar = (props) => {
                         </Link>
                     </div>
                 )}
-                <div className="flex justify-center items-center md:ml-3 bg-white px-1 w-7 md:w-12 h-3 md:h-5 rounded-xl cursor-pointer text-gray-600" onClick={() => setDarkmode((prev) => !prev)}>
+                <div className="flex justify-center items-center ml-3 bg-white px-1 w-7 md:w-12 h-3 md:h-5 rounded-xl cursor-pointer text-gray-600" onClick={() => setDarkmode((prev) => !prev)}>
 
                     {!darkMode ? (
                         <RiMoonFill className="w-5 md:w-7 h-5 md:h-7 p-1 bg-blue-950 rounded-full transition duration-1000 transform -translate-x-3 text-white" />

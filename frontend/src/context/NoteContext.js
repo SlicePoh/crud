@@ -4,7 +4,7 @@ export const NoteContext = createContext()
 
 export const noteReducer=(state,action)=>{
     switch(action.type){
-        case 'SET_NOTE':
+        case 'GET_NOTE':
             return{
                 note: action.payload
             }
@@ -15,6 +15,10 @@ export const noteReducer=(state,action)=>{
         case 'DELETE_NOTE':
             return{
                 note: state.note.filter((w)=>w._id !== action.payload._id)
+            }
+        case 'UPDATE_NOTE':
+            return{
+                note: [action.payload, ...state.note]
             }
         default:
             return state

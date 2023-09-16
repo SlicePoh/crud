@@ -24,6 +24,7 @@ const getNote=async (req,res)=>{
 //create new note
 const createNote= async (req,res)=>{
     const{title,tags,details}=req.body
+    
     let emptyFields=[]
 
     if(!title){
@@ -36,7 +37,7 @@ const createNote= async (req,res)=>{
         emptyFields.push('details')
     }
     if(emptyFields.length>0){
-        return res.status(400).json({error: 'Please fill in all the fields',emptyFields})
+        return res.status(400).json({error: 'Please fill in all the fields',emptyFields})//to ensure that no field remain empty
     }
     //add doc to db
     try{
@@ -63,17 +64,29 @@ const deleteNote=async (req,res)=>{
 
 //update a note
 const updateNote=async (req,res)=>{
+    const{title,tags,details}=req.body
     const {id}= req.params
+    //a new note for updation
+    const newNote={}
+    
+    // let emptyFields=[]
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "No such note"})
-    }
+    if(title)
+        newNote.title=title
 
-    const note= await Note.findByIdAndUpdate({_id: id},{
-        ...req.body
-    })
+    if(tags)
+        newNote.tags=tags
+    
+    if(details)  
+        newNote.details=details
+
+    // if(emptyFields.length>0){
+    //     return res.status(400).json({error: 'Please fill in all the fields',emptyFields})//to ensure that no field remain empty
+    // }
+
+    const note= await Note.findByIdAndUpdate({_id: id},{$set: newNote},{new: true})
     if(!note)
-        return res.status(400).json({error: "No such note"})
+        return res.status(400).json({error: "No such note-400"})
     res.status(200).json(note)
 }
 module.exports={

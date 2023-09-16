@@ -17,7 +17,7 @@ export const Home = () => {
             })
             const json=await response.json();
             if(response.ok){
-                dispatch({type: 'SET_NOTE',payload: json})
+                dispatch({type: 'GET_NOTE',payload: json})
             }
         }
         if(user)
@@ -28,7 +28,7 @@ export const Home = () => {
             <div className="w-full md:w-1/3">
                 <Form/>
             </div>
-            <div className="flex justify-start flex-wrap mt-12 w-full md:w-2/3">
+            <div className="flex justify-start flex-wrap md:mt-12 w-full md:w-2/3">
                 {note && note.map((n)=>(
                     <div className="" key={n._id}>
                         <Card key={n._id} note={n}/>
