@@ -30,15 +30,19 @@ export const Card = ({ note }) => {
     }
   }
 
+  const closeModal = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="flex flex-col items-end justify-between p-4 w-56 lg:w-64 h-fit bg-white dark:bg-sky-950 border-2 dark:border-sky-500 shadow-md rounded-xl my-3 mx-5 shadow-slate-800 dark:shadow-slate-400">
       {isOpen && (
         <div onClose={() => setOpen(false)}
         className="z-50 fixed flex flex-col justify-center items-center left-10 sm:left-20 md:left-32 mx-auto h-fit w-60 md:w-2/6 p-5 rounded-xl top-10 bg-sky-950 dark:bg-sky-400 dark:text-white mt-5">
           <div  className="flex justify-end w-full" >
-            <IoClose onClick={() => setOpen(!isOpen)} className="dark:text-sky-900 text-sky-300 text-2xl " />
+            <IoClose onClick={() => setOpen(!isOpen)} className="dark:text-sky-900 text-sky-300 text-2xl cursor-pointer " />
           </div>
-          <Modal key={note._id} note={note}/>
+          <Modal key={note._id} note={note} closeModal={closeModal}/>
         </div>
     
       )}

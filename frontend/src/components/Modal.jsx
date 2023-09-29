@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNoteContext } from '../hooks/useNoteContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-export const Modal = () => {
+export const Modal = ({note,closeModal}) => {
     const { dispatch } = useNoteContext()
     const { user } = useAuthContext()
 
@@ -18,12 +18,12 @@ export const Modal = () => {
             return
         }
         
-        const note = { title, tags, details }
+        const newNote = { title, tags, details }
 
-        console.log(note)
-        const response = await fetch('/api/note/', {
+        console.log(newNote)
+        const response = await fetch('/api/note/'+ note._id, {
             method: 'PATCH',
-            body: JSON.stringify(note),
+            body: JSON.stringify(newNote),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`
@@ -36,12 +36,17 @@ export const Modal = () => {
         }
         if (response.ok) {
             console.log('note updated', json);
-            dispatch({ type: 'UPDATE_NOTE', payload: json })
+            dispatch({ type: 'UPDATE_NOTE', payload: json });
+            setTitle('');
+            setTags('');
+            setDetails('');
+            closeModal()
         }
+        
     }
     return (
         <form onSubmit={handleSubmit} className="w-full p-2 text-white dark:text-black rounded-xl">
-            <div className="text-xl md:text-2xl font-extrabold">Edit note</div>
+            <div className="text-xl md:text-2xl font-extrabold cursor-default">Edit note</div>
             <div className="flex flex-col  justify-between">
                 <label className="m-3">Title</label>
                 <input placeholder="Running" className="text-black dark:text-white py-1 px-2 rounded-lg dark:bg-sky-800" type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
