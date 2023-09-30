@@ -5,7 +5,7 @@ const mongoose= require('mongoose')
 const cors = require('cors');
 const noteRoutes=require('./routes/note')
 const userRoutes=require('./routes/user')
-
+const PORT=process.env.PORT || 4001
 //express app
 const app= express()
 
@@ -27,8 +27,8 @@ app.use('/api/user',userRoutes)
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
         //listen to requests
-        app.listen(process.env.PORT || 4001,()=>{
-            console.log("Connected to Database and listening to port",process.env.PORT);
+        app.listen(PORT,()=>{
+            console.log(`Connected to Database and listening to port ${PORT}`);
         })
     })
     .catch((error)=>{
