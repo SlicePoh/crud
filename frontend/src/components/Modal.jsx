@@ -7,9 +7,9 @@ export const Modal = ({note,closeModal}) => {
     const { dispatch } = useNoteContext()
     const { user } = useAuthContext()
 
-    const [title, setTitle] = useState('')
-    const [tags, setTags] = useState('')
-    const [details, setDetails] = useState('')
+    const [title, setTitle] = useState(note.title)
+    const [tags, setTags] = useState(note.tags)
+    const [details, setDetails] = useState(note.details)
 
     const [error, setError] = useState(null)
     // const [emptyFields, setEmptyFields] = useState([])

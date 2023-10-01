@@ -9,7 +9,7 @@ import { Modal } from './Modal';
 
 const backendURL = 'https://keep-notes-1pc1.onrender.com';
 export const Card = ({ note }) => {
- 
+
   const [isOpen, setOpen] = useState(false);
 
   const { dispatch } = useNoteContext()
@@ -19,7 +19,7 @@ export const Card = ({ note }) => {
     if (!user) {
       return
     }
-    
+
     const response = await fetch(`${backendURL}/api/note/` + note._id, {
       method: 'DELETE',
       headers: {
@@ -37,22 +37,25 @@ export const Card = ({ note }) => {
   };
 
   return (
-    <div className="flex flex-col items-end justify-between p-4 w-56 lg:w-64 h-fit bg-white dark:bg-sky-950 border-2 dark:border-sky-500 shadow-md rounded-xl my-3 mx-5 shadow-slate-800 dark:shadow-slate-400">
+    <div className="flex flex-col items-end justify-between overflow-hidden p-4 w-56 lg:w-64 h-fit bg-white dark:bg-sky-950 border-2 dark:border-sky-500 shadow-md rounded-xl my-3 mx-5 shadow-slate-800 dark:shadow-slate-400">
       {isOpen && (
         <div onClose={() => setOpen(false)}
-        className="z-50 fixed flex flex-col justify-center items-center left-10 sm:left-20 md:left-32 mx-auto h-fit w-60 md:w-2/6 p-5 rounded-xl top-10 bg-sky-950 dark:bg-sky-400 dark:text-white mt-5">
-          <div  className="flex justify-end w-full" >
+          className="z-50 fixed flex flex-col justify-center items-center left-10 sm:left-20 md:left-32 mx-auto h-fit w-60 md:w-2/6 p-5 rounded-xl top-10 bg-sky-950 dark:bg-sky-400 dark:text-white mt-5">
+          <div className="flex justify-end w-full" >
             <IoClose onClick={() => setOpen(!isOpen)} className="dark:text-sky-900 text-sky-300 text-2xl cursor-pointer " />
           </div>
-          <Modal key={note._id} note={note} closeModal={closeModal}/>
+          <Modal key={note._id} note={note} closeModal={closeModal} />
         </div>
-    
+
       )}
       <div className="flex justify-between items-start w-full ">
         <div className="flex flex-col">
-          <div className="text-lg font-bold dark:text-gray-200">{note.title}</div>
+          <div className="text-lg font-bold dark:text-gray-200">Title: {note.title}</div>
+          <div className="my-1 font-bold dark:text-gray-200">
+            Tag: {note.tags}
+          </div>
           <div className="text-sky-950 dark:text-sky-500 my-1">
-            <strong className="mr-1">Published At : </strong> {formatDistanceToNow(new Date(note.createdAt), { addSuffix: true })}
+            <div className="mt-2 text-sm">Posted {formatDistanceToNow(new Date(note.createdAt), { addSuffix: true })}</div>
           </div>
         </div>
         <div className="flex flex-col justify-center items-center ">
@@ -67,12 +70,9 @@ export const Card = ({ note }) => {
         </div>
       </div>
       <div className="flex flex-col w-full text-slate-700 dark:text-slate-300">
-        <div className="my-1 font-bold">
-          Tag: {note.tags}
-        </div>
-        Details:
-        <div className="">
-          {note.details}
+
+        <div className="text-sm font-semibold">
+          Details: {note.details}
         </div>
       </div>
     </div>
