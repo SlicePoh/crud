@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNoteContext } from '../hooks/useNoteContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
+const backendURL = 'https://keep-notes-1pc1.onrender.com';
 export const Modal = ({note,closeModal}) => {
     const { dispatch } = useNoteContext()
     const { user } = useAuthContext()
@@ -21,7 +22,7 @@ export const Modal = ({note,closeModal}) => {
         const newNote = { title, tags, details }
 
         console.log(newNote)
-        const response = await fetch('/api/note/'+ note._id, {
+        const response = await fetch(`${backendURL}/api/note/`+ note._id, {
             method: 'PATCH',
             body: JSON.stringify(newNote),
             headers: {

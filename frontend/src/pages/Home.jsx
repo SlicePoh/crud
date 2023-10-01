@@ -4,13 +4,14 @@ import { Form } from '../components/Form';
 import { useNoteContext } from '../hooks/useNoteContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 
+const backendURL = 'https://keep-notes-1pc1.onrender.com';
 export const Home = () => {
     const {note,dispatch}=useNoteContext();
     const {user}=useAuthContext()
 
     useEffect(()=>{
         const fetchNotes=async()=>{
-            const response=await fetch('/api/note',{
+            const response=await fetch(`${backendURL}/api/note`,{
                 headers:{
                     'Authorization': `Bearer ${user.token}`
                 }
