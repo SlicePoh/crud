@@ -17,7 +17,7 @@ function App() {
   const {user}=useAuthContext()
   return (
     <div className="bg-sky-300 dark:bg-sky-950  min-h-screen w-full overflow-hidden">
-      <Router>
+      <Router basePath="/">
         <Navbar/>
         <Routes>
           <Route path="/" element={user ? <Home/> : <Navigate to="/login"/>}/>
