@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useNoteContext } from '../hooks/useNoteContext'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { IP } from './IPConfig';
 
-const backendURL = 'https://keep-notes-1pc1.onrender.com';
+
 export const Form = () => {
     const {dispatch}= useNoteContext()
     const {user}=useAuthContext()
@@ -20,7 +21,7 @@ export const Form = () => {
             return
         }
         const note={title,tags,details}
-        const response=await fetch(`${backendURL}/api/note`,{
+        const response=await fetch(IP,{
             method: 'POST',
             body: JSON.stringify(note),
             headers: {

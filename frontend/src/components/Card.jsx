@@ -6,8 +6,9 @@ import { useNoteContext } from '../hooks/useNoteContext';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { useAuthContext } from '../hooks/useAuthContext';
 import { Modal } from './Modal';
+import { IP } from './IPConfig';
 
-const backendURL = 'https://keep-notes-1pc1.onrender.com';
+
 export const Card = ({ note }) => {
 
   const [isOpen, setOpen] = useState(false);
@@ -20,7 +21,7 @@ export const Card = ({ note }) => {
       return
     }
 
-    const response = await fetch(`${backendURL}/api/note/` + note._id, {
+    const response = await fetch(IP + note._id, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${user.token}`
